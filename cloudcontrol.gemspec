@@ -6,6 +6,6 @@ Gem::Specification.new do |s|
   s.description = "Use credentials set in ENV vars if database.yml credentials are empty. Supports MySQL and ElephantSQL (Postgres) on the cloudControl platform."
   s.authors     = ["Alexander Rösel"]
   s.email       = 'info@netzok.net'
-  s.files       = ["lib/cloudcotrol.rb", "LICENSE"]
+  s.files       = ["lib/cloudcontrol.rb", "LICENSE"]
   s.homepage    = 'http://justfrontend.com'
 end
