@@ -1,6 +1,6 @@
 #cctrl_database_configuration
 
-Override empty database.yml settings with the ENV vars on the cloudControl plattform
+Override empty database.yml settings with the ENV vars on the cloudControl plattform. Supports [MySQLs](https://www.cloudcontrol.com/add-ons/mysqls "MySQLs Addon at cloudControl"), [MySQLd](https://www.cloudcontrol.com/add-ons/mysqld "MySQLd Addon at cloudControl") and [ElephantSQL](https://www.cloudcontrol.com/add-ons/elephantsql "ElephantSQL Addon at cloudControl") (Postgres)
 
 ##Installation
 
