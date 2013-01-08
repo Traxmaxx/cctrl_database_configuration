@@ -17,6 +17,7 @@ To share a database over two deployments without hardcoding the credentials you 
 
 ##Example database.yml
 
+Credentials will be served through the gem:
 ~~~
 production:
   host:
@@ -28,8 +29,8 @@ production:
   username:
   password:
 ~~~
-Credentials will be served through the gem
 
+Credentials will not be touched because they are not empty:
 ~~~
 production:
   host: localhost
@@ -41,8 +42,8 @@ production:
   username: username
   password: password
 ~~~
-Credentials will not be touched because they are not empty
 
+You can also serve specific values only through the gem:
 ~~~
 production:
   host: localhost
@@ -54,4 +55,3 @@ production:
   username:
   password:
 ~~~
-You can also serve some specific values through the gem only
