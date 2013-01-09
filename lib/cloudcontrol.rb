@@ -1,46 +1,29 @@
+require 'erb'
+
+require 'cloudcontrol/mysql'
+require 'cloudcontrol/postgres'
+
+module Cloudcontrol
+  def self.reconfigure_database_configuration(config)
+    rails_env = ENV['RAILS_ENV'] || 'development'
+
+    # set creds for the different adapters
+    case config[rails_env]['adapter']
+      when 'mysql2'  # addons MySQLS and MySQLD
+        Cloudcontrol::configure_mysql config, rails_env
+      when 'postgresql'  # addon ElephantSQL
+        Cloudcontrol::configure_postgres config, rails_env
+    end
+  end
+end
+
 module Rails
   class Application
     class Configuration < ::Rails::Engine::Configuration
       def database_configuration
-        require 'erb'
-
-        rails_env = ENV['RAILS_ENV'] || 'development'
-
         config = YAML::load ERB.new(IO.read(paths['config/database'].first)).result
 
-        # set creds for the different adapters
-        case config[rails_env]['adapter']
-          when 'mysql2'  # addons MySQLS and MySQLD
-            config[rails_env].each do |key, value|
-              if value.nil?
-                if key == 'username'  # NOTE auto match breaks on username so we need to look for it manually
-                  config[rails_env][key] = ENV['MYSQLD_USER'] || ENV['MYSQLS_USER'] || nil
-                else
-                  config[rails_env][key] = ENV["MYSQLD_#{ key.upcase }"] || ENV["MYSQLS_#{ key.upcase }"] || nil
-                end
-              end
-            end
-
-          when 'postgresql'  # addon ElephantSQL
-            config[rails_env].each do |key, value|
-              if value.nil? && ENV['ELEPHANTSQL_URL']
-                elephant_uri = URI.parse ENV['ELEPHANTSQL_URL']
-                if key == 'database'
-                  config[rails_env][key] = elephant_uri.path[1 .. -1]
-                elsif key == 'username'
-                  config[rails_env][key] = elephant_uri.user
-                elsif key == 'password'
-                  config[rails_env][key] = elephant_uri.password
-                elsif key == 'host'
-                  config[rails_env][key] = elephant_uri.host
-                elsif key == 'port'
-                  config[rails_env][key] = elephant_uri.port
-                end
-              end
-            end
-        end
-
-        return config
+        return Cloudcontrol::reconfigure_database_configuration config
       end
     end
   end
