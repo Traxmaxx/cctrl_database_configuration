@@ -4,9 +4,9 @@ Override empty database.yml settings with the ENV vars on the cloudControl platt
 
 ##Installation
 
-Add the following to your gemfile 
+Add the following to your gemfile
 ~~~
-gem "cloudcontrol", :git => "git://github.com/Traxmaxx/cctrl_database_configuration.git"
+gem "cloudcontrol-rails", :git => "git://github.com/Traxmaxx/cctrl_database_configuration.git"
 ~~~
 
 And run `bundle install`
