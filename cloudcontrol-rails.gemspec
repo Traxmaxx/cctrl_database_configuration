@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.email         = ["info@netzok.net"]
   s.summary       = "Autoload MySQL and Postgres credentials from ENV vars on cloudControl"
   s.description   = "Use credentials set in ENV vars if database.yml credentials are empty. Supports MySQL and ElephantSQL (Postgres) on the cloudControl platform."
-  s.homepage      = "http://justfrontend.com"
+  s.homepage      = "https://github.com/Traxmaxx/cctrl_database_configuration"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {spec}/*`.split("\n")
