@@ -1,5 +1,5 @@
 module Cloudcontrol
-  def self.configure_postgres(config, rails_env)
+  def self.configure_postgres(config, rails_env)  # NOTE addon ElephantSQL
     config[rails_env].each do |key, value|
       if value.nil? && ENV['ELEPHANTSQL_URL']
         elephant_uri = URI.parse ENV['ELEPHANTSQL_URL']

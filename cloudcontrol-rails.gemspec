@@ -1,6 +1,8 @@
+# encoding = utf-8
+
 Gem::Specification.new do |s|
   s.name          = 'cloudcontrol-rails'
-  s.version       = "0.0.2"
+  s.version       = "0.0.3"
   s.authors       = ["Alexander Rösel"]
   s.email         = ["info@netzok.net"]
   s.summary       = "Autoload MySQL and Postgres credentials from ENV vars on cloudControl"
