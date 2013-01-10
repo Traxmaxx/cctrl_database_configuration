@@ -7,9 +7,9 @@ module Cloudcontrol
 
     # set creds for the different adapters
     case config[rails_env]['adapter']
-      when 'mysql2'  # addons MySQLS and MySQLD
+      when 'mysql2'
         Cloudcontrol::configure_mysql config, rails_env
-      when 'postgresql'  # addon ElephantSQL
+      when 'postgresql'
         Cloudcontrol::configure_postgres config, rails_env
     end
   end
