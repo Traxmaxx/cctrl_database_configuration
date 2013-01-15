@@ -6,8 +6,8 @@ require 'spec_helper'
 require 'cloudcontrol/cloudcontrol'
 
 describe "Cloudcontrol" do
-  let(:db_config_dev) { [ adapter ] + [ 'env' ] * 5 }
-  let(:db_config_prod) { [ adapter ] + [ 'env' ] * 5 }
+  let(:db_config_dev) { [ adapter, 'env', 42, 'env', 'env', 'env' ] }
+  let(:db_config_prod) { [ adapter, 'env', 42, 'env', 'env', 'env' ] }
 
   let(:database_yml) do
     yml = <<END
@@ -47,7 +47,7 @@ end
     {
       "adapter" => adapter,
       "host" => 'env',
-      "port" => 'env',
+      "port" => 42,
       "database" => 'env',
       "username" => 'env',
       "password" => 'env',
@@ -58,7 +58,7 @@ end
     ENV = {
       'RAILS_ENV' => "production",
       'MYSQLS_HOST' => "env",
-      'MYSQLS_PORT' => "env",
+      'MYSQLS_PORT' => "42",
       'MYSQLS_DATABASE' => "env",
       'MYSQLS_USER' => "env",
       'MYSQLS_PASSWORD' => "env",
@@ -181,7 +181,7 @@ end
       end
 
       describe "for production" do
-        let(:db_config_prod) { [ adapter, 'host', '42', 'db', nil, nil ] }
+        let(:db_config_prod) { [ adapter, 'host', 42, 'db', nil, nil ] }
 
         it "should return proper value" do
           env = 'production'
@@ -195,7 +195,7 @@ end
       end
 
       describe "for development" do
-        let(:db_config_dev) { [ adapter, 'host', '42', 'db', nil, nil ] }
+        let(:db_config_dev) { [ adapter, 'host', 42, 'db', nil, nil ] }
 
         it "should return proper value" do
           env = 'development'
@@ -210,7 +210,7 @@ end
     end
 
     describe "with fully provided values" do
-      let(:db_config_prod) { [ adapter, 'host', '42', 'db', 'username', 'pass' ] }
+      let(:db_config_prod) { [ adapter, 'host', 42, 'db', 'username', 'pass' ] }
       let(:expected_res) do
         {
           "adapter"=>adapter,
