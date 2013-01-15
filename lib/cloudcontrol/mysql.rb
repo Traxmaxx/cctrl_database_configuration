@@ -6,6 +6,8 @@ module Cloudcontrol
           config[rails_env][key] = ENV['MYSQLD_USER'] || ENV['MYSQLS_USER'] || nil
         else
           config[rails_env][key] = ENV["MYSQLD_#{ key.upcase }"] || ENV["MYSQLS_#{ key.upcase }"] || nil
+
+          config[rails_env][key] = config[rails_env][key].to_i if key == 'port'
         end
       end
     end
