@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cloudcontrol-rails (0.0.4)
+    cloudcontrol-rails (0.0.5)
 
 GEM
   remote: http://rubygems.org/
