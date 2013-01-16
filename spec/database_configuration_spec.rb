@@ -5,6 +5,8 @@ require 'yaml'
 require 'spec_helper'
 require 'cloudcontrol/cloudcontrol'
 
+# TODO refactor using shared examples/contexts
+
 describe "Cloudcontrol" do
   let(:db_config_dev) { [ adapter, 'env', 42, 'env', 'env', 'env' ] }
   let(:db_config_prod) { [ adapter, 'env', 42, 'env', 'env', 'env' ] }
@@ -57,13 +59,23 @@ end
   before do
     ENV = {
       'RAILS_ENV' => "production",
-      'MYSQLS_HOST' => "env",
+      'MYSQLS_HOSTNAME' => "env",
       'MYSQLS_PORT' => "42",
       'MYSQLS_DATABASE' => "env",
-      'MYSQLS_USER' => "env",
+      'MYSQLS_USERNAME' => "env",
       'MYSQLS_PASSWORD' => "env",
       'ELEPHANTSQL_URL' => 'postgres://env:env@env.env.env:42/env',
     }
+
+    #ENV = {  # TODO
+      #'RAILS_ENV' => "production",
+      #'MYSQLD_HOST' => "env",
+      #'MYSQLD_PORT' => "42",
+      #'MYSQLD_DATABASE' => "env",
+      #'MYSQLD_USER' => "env",
+      #'MYSQLD_PASSWORD' => "env",
+      #'ELEPHANTSQL_URL' => 'postgres://env:env@env.env.env:42/env',
+    #}
   end
 
   describe "MySQL" do
