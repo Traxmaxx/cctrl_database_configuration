@@ -69,6 +69,31 @@ END
     ENV = env_vars
   end
 
+  describe "with only adapter" do
+    let(:expected_res) { not_modified }  # HACK
+    let(:db_config_prod) { [ adapter ] + [ nil] * 5 }
+    let(:database_yml) do
+      yml = <<END
+development:
+  adapter: %s
+  encoding: utf8
+  reconnect: false
+  pool: 5
+  host: %s
+  port: %s
+  database: %s
+  username: %s
+  password: %s
+production:
+  adapter: %s
+END
+
+      yml % (db_config_dev + [ adapter ])
+    end
+
+    it_should_behave_like "a configuration test", 'production'
+  end
+
   describe "without provided values" do
     let(:expected_res) { not_modified }  # HACK
     let(:db_config_prod) { [ adapter ] + [ nil] * 5 }
