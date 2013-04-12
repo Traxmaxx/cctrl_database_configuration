@@ -11,7 +11,8 @@ module Cloudcontrol
     config[rails_env].each do |key, value|
       if value.nil?
         new_value = ADDON_KEYS[key].reduce(nil) { |acc, e| acc ||= ENV[e] }
-        new_value = new_value.to_i if key == 'port' && new_value
+        raise "No enviroment variable for key '#{key}' found" if new_value.nil?
+        new_value = new_value.to_i if key == 'port'
 
         config[rails_env][key] = new_value
       end
